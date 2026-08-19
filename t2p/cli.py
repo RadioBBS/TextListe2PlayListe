@@ -33,6 +33,8 @@ import sys
 import time
 from pathlib import Path
 
+from project_meta import check_runtime
+
 from . import __date__, __description__, __version__
 from .inventar import filter_tracks, load_inventory, save_inventory, scan_inventory
 from .match import build_token_index, match_line, read_text_lines
@@ -303,6 +305,7 @@ def main(argv: list[str] | None = None) -> int:
     """
     parser = build_parser()
     args = parser.parse_args(argv)
+    check_runtime()
     if args.command == "inventar":
         code = cmd_inventar(args)
     elif args.command == "suche":

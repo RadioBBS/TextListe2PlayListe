@@ -1,3 +1,21 @@
+# TextListe2PlayListe – Git-Ignore-Liste.
+#
+# Projekt:     TextListe2PlayListe
+# Modul:       .gitignore
+# Version:     1.1.0
+# Stand:       2026-08-18
+# Abhaengig:   nur Python-Standardbibliothek (Python >= 3.11)
+# Bezug:       requirements.txt (leer – Stdlib only)
+# Lizenz:      –
+# Upstream:    –
+# Erstellt mit: Cursor Grok 4.6
+# Autor:       Frank Heider / RadioBBS
+#
+# Historie
+# --------
+# Version 1.0.0 – 2026-08-01 – Python, Inventar, Playlisten
+# Version 1.1.0 – 2026-08-18 – Styleguide 1.4.0: __local__/__scratch__/__testdata__/
+
 # Python
 __pycache__/
 *.py[cod]
@@ -7,7 +25,7 @@ __pycache__/
 venv/
 .env
 
-# Inventar & erzeugte Playlisten (lokal, oft groß)
+# Inventar & erzeugte Playlisten (lokal, oft gross)
 *.json
 !package.json
 inventar/
@@ -15,6 +33,10 @@ output/
 *.m3u
 *.m3u8
 !examples/**
+
+__local__/
+__scratch__/
+__testdata__/
 
 # IDE / OS
 .idea/

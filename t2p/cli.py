@@ -1,4 +1,30 @@
-"""Kommandozeile für TextListe2PlayListe."""
+"""
+TextListe2PlayListe – Kommandozeile fuer Inventar, Suche und Playliste.
+
+Projekt:     TextListe2PlayListe
+Modul:       t2p/cli.py
+Version:     1.1.0
+Stand:       2026-08-18
+Abhaengig:   nur Python-Standardbibliothek (Python >= 3.11)
+Bezug:       requirements.txt (leer – Stdlib only)
+Lizenz:      –
+Upstream:    –
+Erstellt mit: Cursor Grok 4.6
+Autor:       Frank Heider / RadioBBS
+
+Beschreibung
+------------
+Kommandozeile für TextListe2PlayListe.
+
+Historie
+--------
+Version 1.0.0 – 2026-08-01 – Inventar, Matching, m3u8-Export
+Version 1.1.0 – 2026-08-18 – Styleguide 1.4.0: Dateikopf Pflichtfelder
+
+Aufruf / Nutzung
+----------------
+  python textliste2playlist.py --help
+"""
 
 from __future__ import annotations
 
@@ -7,7 +33,7 @@ import sys
 import time
 from pathlib import Path
 
-from . import __description__, __version__
+from . import __date__, __description__, __version__
 from .inventar import filter_tracks, load_inventory, save_inventory, scan_inventory
 from .match import build_token_index, match_line, read_text_lines
 from .playlist import write_m3u
@@ -18,11 +44,38 @@ DEFAULT_PLAYLIST_DIR = Path("J:/FooBar_Playlists")
 
 
 def build_parser() -> argparse.ArgumentParser:
+    """
+    Beschreibung: Baut den Argumentparser mit Unterbefehlen.
+    Parameter: keine
+    Rueckgabewert: argparse.ArgumentParser
+    Fehlerfaelle: keine
+    Beispiel: build_parser().parse_args(["inventar", "--help"])
+    """
     parser = argparse.ArgumentParser(
         prog="textliste2playlist",
         description=__description__,
+        epilog=(
+            "Beispiele:\n"
+            "  python textliste2playlist.py --help\n"
+            "  python textliste2playlist.py --version\n"
+            "  python textliste2playlist.py inventar --root J:\\ --Ende\n"
+            "  python textliste2playlist.py suche \"Gobbi Adios\"\n"
+            "  python textliste2playlist.py playlist LISTE.txt --dry-run"
+        ),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
+    parser.add_argument(
+        "--version",
+        action="version",
+        version=f"TextListe2PlayListe {__version__} ({__date__}) – {__description__}",
+        help="Version und Datum. Typ: Flag. Beispiel: --version",
+    )
+    parser.add_argument(
+        "-E",
+        "--Ende",
+        action="store_true",
+        help='Wartet am Ende. Typ: Flag. Standard: aus. Beispiel: --Ende',
+    )
 
     sub = parser.add_subparsers(dest="command", required=True)
 
@@ -103,6 +156,13 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def cmd_inventar(args: argparse.Namespace) -> int:
+    """
+    Beschreibung: Scannt den Datentraeger und speichert das Inventar.
+    Parameter: args – Namespace mit root, output, progress_every
+    Rueckgabewert: 0 bei Erfolg
+    Fehlerfaelle: OSError beim Schreiben
+    Beispiel: cmd_inventar(parser.parse_args(["inventar"]))
+    """
     root: Path = args.root
     print(f"Scanne Inventar unter: {root.resolve()}")
     t0 = time.perf_counter()
@@ -115,6 +175,13 @@ def cmd_inventar(args: argparse.Namespace) -> int:
 
 
 def cmd_suche(args: argparse.Namespace) -> int:
+    """
+    Beschreibung: Sucht im Inventar und gibt Treffer aus.
+    Parameter: args – Namespace mit query, inventar, limit
+    Rueckgabewert: 0 bei Erfolg
+    Fehlerfaelle: FileNotFoundError wenn das Inventar fehlt
+    Beispiel: cmd_suche(parser.parse_args(["suche", "Gobbi"]))
+    """
     inv = load_inventory(args.inventar)
     hits = filter_tracks(inv.tracks, args.query)[: args.limit]
     print(f"{len(hits)} Treffer (Anzeige max. {args.limit}) – Inventar: {inv.track_count} Titel")
@@ -131,6 +198,13 @@ def _default_playlist_path(textliste: Path) -> Path:
 
 
 def cmd_playlist(args: argparse.Namespace) -> int:
+    """
+    Beschreibung: Erzeugt eine m3u8 aus einer Textliste.
+    Parameter: args – Namespace mit textliste, inventar, output, ...
+    Rueckgabewert: 0 bei vollem Match, 1 bei fehlender Datei, 2 bei Fehltreffern
+    Fehlerfaelle: fehlende Textliste/Inventar
+    Beispiel: cmd_playlist(parser.parse_args(["playlist", "liste.txt", "--dry-run"]))
+    """
     if not args.textliste.is_file():
         print(f"Textliste nicht gefunden: {args.textliste}", file=sys.stderr)
         return 1
@@ -195,14 +269,49 @@ def cmd_playlist(args: argparse.Namespace) -> int:
     return 0 if missing == 0 else 2
 
 
+def wait_for_any_key(prompt: str = 'Programmende: "Hit any Key or Enter"') -> None:
+    """
+    Beschreibung: Wartet am Programmende auf Taste oder Enter (--Ende / -E).
+    Parameter: prompt – Anzeigetext
+    Rueckgabewert: None
+    Fehlerfaelle: Fallback auf input() wenn msvcrt fehlt
+    Beispiel: wait_for_any_key()
+    """
+    print(prompt, end="", flush=True)
+    if sys.platform == "win32":
+        try:
+            import msvcrt
+
+            msvcrt.getch()
+            print()
+            return
+        except (ImportError, OSError):
+            pass
+    try:
+        input()
+    except (EOFError, KeyboardInterrupt):
+        print()
+
+
 def main(argv: list[str] | None = None) -> int:
+    """
+    Beschreibung: CLI-Einstieg fuer Inventar, Suche und Playliste.
+    Parameter: argv – optionale Argumentliste
+    Rueckgabewert: Exit-Code
+    Fehlerfaelle: argparse beendet bei ungueltigen Parametern mit Code 2
+    Beispiel: python textliste2playlist.py inventar --Ende
+    """
     parser = build_parser()
     args = parser.parse_args(argv)
     if args.command == "inventar":
-        return cmd_inventar(args)
-    if args.command == "suche":
-        return cmd_suche(args)
-    if args.command == "playlist":
-        return cmd_playlist(args)
-    parser.error(f"Unbekanntes Kommando: {args.command}")
-    return 2
+        code = cmd_inventar(args)
+    elif args.command == "suche":
+        code = cmd_suche(args)
+    elif args.command == "playlist":
+        code = cmd_playlist(args)
+    else:
+        parser.error(f"Unbekanntes Kommando: {args.command}")
+        return 2
+    if args.Ende:
+        wait_for_any_key()
+    return code

@@ -12,7 +12,7 @@ Bezug:       requirements.txt (leer – Stdlib only)
 Lizenz:      –
 Upstream:    –
 Erstellt mit: Cursor Grok 4.6
-Autor:       Frank Heider / RadioBBS
+Autor:       (FFHB) / RadioBBS
 ```
 
 Erstelle aus einer Text-Liste eine m3u Playliste.

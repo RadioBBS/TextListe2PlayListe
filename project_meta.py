@@ -10,7 +10,7 @@ Bezug:       requirements.txt (leer – Stdlib only)
 Lizenz:      –
 Upstream:    –
 Erstellt mit: Cursor Grok 4.6
-Autor:       Frank Heider / RadioBBS
+Autor:       (FFHB) / RadioBBS
 
 Beschreibung
 ------------
@@ -47,7 +47,7 @@ __date__ = "2026-08-18"
 __license__ = "–"
 __created_with__ = "Cursor Grok 4.6"
 __upstream__ = "–"
-__author__ = "Frank Heider / RadioBBS"
+__author__ = "(FFHB) / RadioBBS"
 __requires__ = "nur Python-Standardbibliothek (Python >= 3.11)"
 __requirements_ref__ = "requirements.txt (leer – Stdlib only)"
 

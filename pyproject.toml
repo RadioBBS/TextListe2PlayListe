@@ -1,0 +1,29 @@
+# TextListe2PlayListe – Python-Projektdefinition.
+#
+# Projekt:     TextListe2PlayListe
+# Modul:       pyproject.toml
+# Version:     1.1.0
+# Stand:       2026-08-18
+# Abhaengig:   nur Python-Standardbibliothek (Python >= 3.11)
+# Bezug:       requirements.txt (leer – Stdlib only)
+# Lizenz:      –
+# Upstream:    –
+# Erstellt mit: Cursor Grok 4.6
+# Autor:       (FFHB) / RadioBBS
+#
+# Historie
+# --------
+# Version 1.1.0 – 2026-08-21 – Nachzug pyproject.toml (Software-Standard 1.1.0)
+#
+#   python -m pip install -r requirements.txt
+
+[project]
+name = "textliste2playlist"
+version = "1.1.0"
+description = "Erstelle aus einer Text-Liste eine m3u Playliste."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "–" }
+authors = [{ name = "(FFHB) / RadioBBS" }]
+dependencies = [
+]

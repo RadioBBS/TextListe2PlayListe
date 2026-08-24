@@ -27,3 +27,8 @@ license = { text = "–" }
 authors = [{ name = "(FFHB) / RadioBBS" }]
 dependencies = [
 ]
+
+[project.urls]
+Homepage = "https://github.com/RadioBBS/TextListe2PlayListe"
+Repository = "https://github.com/RadioBBS/TextListe2PlayListe"
+

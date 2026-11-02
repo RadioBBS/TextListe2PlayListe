@@ -3,8 +3,8 @@ TextListe2PlayListe – Gemeinsame Projekt-Metadaten.
 
 Projekt:     TextListe2PlayListe
 Modul:       project_meta.py
-Version:     1.1.0
-Stand:       2026-08-18
+Version:     1.1.1
+Stand:       2026-11-02
 Abhaengig:   nur Python-Standardbibliothek (Python >= 3.11)
 Bezug:       requirements.txt (leer – Stdlib only)
 Lizenz:      –
@@ -22,6 +22,7 @@ Historie
 Version 1.0.0 – 2026-08-01 – Inventar, Matching, m3u8-Export
 Version 1.1.0 – 2026-08-18 – Styleguide 1.4.0: Pflichtblock, CLI --help/--version/--Ende
 Version 1.1.0 – 2026-08-20 – check_runtime(): Python-Mindestversion und optionales Windows
+Version 1.1.1 – 2026-11-02 – Startausgabe und Python 3.11 nach Styleguide 2.1.0.
 
 Aufruf / Nutzung
 ----------------
@@ -40,10 +41,10 @@ PROJECT_NAME = "TextListe2PlayListe"
 PROJECT_DESCRIPTION = "Erstelle aus einer Text-Liste eine m3u Playliste."
 PYTHON_REQUIRES = ">=3.11"
 REQUIRES_WINDOWS = False
-STYLEGUIDE_VERSION = "1.4.0"
+STYLEGUIDE_VERSION = "2.1.0"
 
-__version__ = "1.1.0"
-__date__ = "2026-08-18"
+__version__ = "1.1.1"
+__date__ = "2026-11-02"
 __license__ = "–"
 __created_with__ = "Cursor Grok 4.6"
 __upstream__ = "–"
@@ -57,9 +58,9 @@ def min_python_tuple() -> tuple[int, int]:
     """
     Beschreibung: Liest die Mindest-Python-Version aus PYTHON_REQUIRES.
     Parameter: keine
-    Rueckgabewert: Tupel (major, minor), z. B. (3, 10)
+    Rueckgabewert: Tupel (major, minor), z. B. (3, 11)
     Fehlerfaelle: ValueError bei ungueltigem PYTHON_REQUIRES
-    Beispiel: min_python_tuple() == (3, 10)
+    Beispiel: min_python_tuple() == (3, 11)
     """
     match = re.search(r"(\d+)\.(\d+)", PYTHON_REQUIRES)
     if match is None:

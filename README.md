@@ -5,14 +5,18 @@ TextListe2PlayListe – Aus einer Textliste eine m3u-Playliste erzeugen.
 
 Projekt:     TextListe2PlayListe
 Modul:       README.md
-Version:     1.1.0
-Stand:       2026-08-18
+Version:     1.1.1
+Stand:       2026-11-02
 Abhaengig:   nur Python-Standardbibliothek (Python >= 3.11)
 Bezug:       requirements.txt (leer – Stdlib only)
 Lizenz:      –
 Upstream:    –
 Erstellt mit: Cursor Grok 4.6
 Autor:       (FFHB) / RadioBBS
+
+Historie
+--------
+Version 1.1.1 – 2026-11-02 – Startausgabe und Python 3.11 nach Styleguide 2.1.0.
 ```
 
 Erstelle aus einer Text-Liste eine m3u Playliste.

@@ -2,8 +2,8 @@
 #
 # Projekt:     TextListe2PlayListe
 # Modul:       .gitignore
-# Version:     1.1.0
-# Stand:       2026-08-18
+# Version:     1.1.1
+# Stand:       2026-11-02
 # Abhaengig:   nur Python-Standardbibliothek (Python >= 3.11)
 # Bezug:       requirements.txt (leer – Stdlib only)
 # Lizenz:      –
@@ -15,6 +15,7 @@
 # --------
 # Version 1.0.0 – 2026-08-01 – Python, Inventar, Playlisten
 # Version 1.1.0 – 2026-08-18 – Styleguide 1.4.0: __local__/__scratch__/__testdata__/
+# Version 1.1.1 – 2026-11-02 – Startausgabe und Python 3.11 nach Styleguide 2.1.0.
 
 # Python
 __pycache__/

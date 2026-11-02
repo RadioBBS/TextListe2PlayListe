@@ -2,8 +2,8 @@
 #
 # Projekt:     TextListe2PlayListe
 # Modul:       CITATION.cff
-# Version:     1.1.0
-# Stand:       2026-08-18
+# Version:     1.1.1
+# Stand:       2026-11-02
 # Abhaengig:   nur Python-Standardbibliothek (Python >= 3.11)
 # Bezug:       requirements.txt (leer – Stdlib only)
 # Lizenz:      –
@@ -14,13 +14,14 @@
 # Historie
 # --------
 # Version 1.1.0 – 2026-08-24 – Datei angelegt (Software-Standard 1.2.0).
+# Version 1.1.1 – 2026-11-02 – Startausgabe und Python 3.11 nach Styleguide 2.1.0.
 
 cff-version: 1.2.0
 message: "Bitte mit diesen Metadaten zitieren."
 title: TextListe2PlayListe
 abstract: Erstelle aus einer Text-Liste eine m3u Playliste.
-version: "1.1.0"
-date-released: "2026-08-18"
+version: "1.1.1"
+date-released: "2026-11-02"
 authors:
   - name: "(FFHB) / RadioBBS"
 repository-code: https://github.com/RadioBBS/TextListe2PlayListe
